@@ -550,6 +550,258 @@
      "reading": "てがみ"
     }
    ]
+  },
+  {
+   "id": "E01",
+   "category": "compound",
+   "text": "愛と正義を信じてる",
+   "expected": "あいとせいぎをしんじてる",
+   "focus": [
+    {
+     "surface": "正義",
+     "reading": "せいぎ"
+    }
+   ]
+  },
+  {
+   "id": "E02",
+   "category": "basic",
+   "text": "僕の傍にいてほしい",
+   "expected": "ぼくのそばにいてほしい",
+   "focus": [
+    {
+     "surface": "傍",
+     "reading": "そば"
+    }
+   ]
+  },
+  {
+   "id": "E03",
+   "category": "compound",
+   "text": "我等の歌が響く",
+   "expected": "われらのうたがひびく",
+   "focus": [
+    {
+     "surface": "我等",
+     "reading": "われら"
+    }
+   ]
+  },
+  {
+   "id": "E04",
+   "category": "compound",
+   "text": "僕等の夏が終わる",
+   "expected": "ぼくらのなつがおわる",
+   "focus": [
+    {
+     "surface": "等",
+     "reading": "ら"
+    }
+   ]
+  },
+  {
+   "id": "E05",
+   "category": "compound",
+   "text": "空に一番星が光る",
+   "expected": "そらにいちばんぼしがひかる",
+   "focus": [
+    {
+     "surface": "一番星",
+     "reading": "いちばんぼし"
+    }
+   ]
+  },
+  {
+   "id": "E06",
+   "category": "basic",
+   "text": "君は僕の宝物",
+   "expected": "きみはぼくのたからもの",
+   "focus": [
+    {
+     "surface": "宝物",
+     "reading": "たからもの"
+    }
+   ]
+  },
+  {
+   "id": "E07",
+   "category": "compound",
+   "text": "不器用な生き様",
+   "expected": "ぶきようないきざま",
+   "focus": [
+    {
+     "surface": "生き様",
+     "reading": "いきざま"
+    }
+   ]
+  },
+  {
+   "id": "E08",
+   "category": "basic",
+   "text": "全部が愛おしい",
+   "expected": "ぜんぶがいとおしい",
+   "focus": [
+    {
+     "surface": "愛おしい",
+     "reading": "いとおしい"
+    }
+   ]
+  },
+  {
+   "id": "E09",
+   "category": "compound",
+   "text": "古い御伽噺のように",
+   "expected": "ふるいおとぎばなしのように",
+   "focus": [
+    {
+     "surface": "御伽噺",
+     "reading": "おとぎばなし"
+    }
+   ]
+  },
+  {
+   "id": "E10",
+   "category": "basic",
+   "text": "誰かの所為にしない",
+   "expected": "だれかのせいにしない",
+   "focus": [
+    {
+     "surface": "所為",
+     "reading": "せい"
+    }
+   ]
+  },
+  {
+   "id": "E11",
+   "category": "compound",
+   "text": "兎に角走れ",
+   "expected": "とにかくはしれ",
+   "focus": [
+    {
+     "surface": "兎に角",
+     "reading": "とにかく"
+    }
+   ]
+  },
+  {
+   "id": "E12",
+   "category": "compound",
+   "text": "粉雪が舞う街",
+   "expected": "こなゆきがまうまち",
+   "focus": [
+    {
+     "surface": "粉雪",
+     "reading": "こなゆき"
+    }
+   ]
+  },
+  {
+   "id": "E13",
+   "category": "compound",
+   "text": "黄昏時の帰り道",
+   "expected": "たそがれどきのかえりみち",
+   "focus": [
+    {
+     "surface": "黄昏時",
+     "reading": "たそがれどき"
+    }
+   ]
+  },
+  {
+   "id": "E14",
+   "category": "compound",
+   "text": "あの日の一目惚れ",
+   "expected": "あのひのひとめぼれ",
+   "focus": [
+    {
+     "surface": "一目惚れ",
+     "reading": "ひとめぼれ"
+    }
+   ]
+  },
+  {
+   "id": "E15",
+   "category": "basic",
+   "text": "貴女に会いたい",
+   "expected": "あなたにあいたい",
+   "focus": [
+    {
+     "surface": "貴女",
+     "reading": "あなた"
+    }
+   ]
+  },
+  {
+   "id": "E16",
+   "category": "basic",
+   "text": "森の小人たち",
+   "expected": "もりのこびとたち",
+   "focus": [
+    {
+     "surface": "小人",
+     "reading": "こびと"
+    }
+   ]
+  },
+  {
+   "id": "E17",
+   "category": "compound",
+   "text": "今日この頃の空",
+   "expected": "きょうこのごろのそら",
+   "focus": [
+    {
+     "surface": "頃",
+     "reading": "ごろ"
+    }
+   ]
+  },
+  {
+   "id": "E18",
+   "category": "basic",
+   "text": "あの頃の僕ら",
+   "expected": "あのころのぼくら",
+   "focus": [
+    {
+     "surface": "頃",
+     "reading": "ころ"
+    }
+   ]
+  },
+  {
+   "id": "E19",
+   "category": "basic",
+   "text": "金がないけど笑う",
+   "expected": "かねがないけどわらう",
+   "focus": [
+    {
+     "surface": "金",
+     "reading": "かね"
+    }
+   ]
+  },
+  {
+   "id": "E20",
+   "category": "basic",
+   "text": "金の指輪を外す",
+   "expected": "きんのゆびわをはずす",
+   "focus": [
+    {
+     "surface": "金",
+     "reading": "きん"
+    }
+   ]
+  },
+  {
+   "id": "E21",
+   "category": "compound",
+   "text": "底抜けに明るい",
+   "expected": "そこぬけにあかるい",
+   "focus": [
+    {
+     "surface": "底抜け",
+     "reading": "そこぬけ"
+    }
+   ]
   }
  ]
 }
