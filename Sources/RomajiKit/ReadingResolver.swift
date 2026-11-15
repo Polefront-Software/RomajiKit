@@ -20,7 +20,10 @@ public enum ReadingResolver {
         case .audio:
             // What was heard is a suggestion, never applied silently.
             needsReview = true
-        case .dictionary, .exception, .classifier:
+        case .classifier:
+            // The pick says for itself how sure it is.
+            needsReview = best.needsReview
+        case .dictionary, .exception:
             needsReview = token.needsReview || best.needsReview
         }
         var candidates: [String] = []

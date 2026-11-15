@@ -8,27 +8,34 @@ public struct RomajiEngine: Sendable {
     public let exceptions: ExceptionList
     public let gikun: GikunHints
     public let store: OverrideStore?
+    /// Picks among a word's readings from its surroundings; none unless
+    /// one is given.
+    public let disambiguator: (any ReadingDisambiguator)?
 
     public init(
         analyzer: any JapaneseAnalyzer,
         numbers: NumberReader? = NumberReader(),
         exceptions: ExceptionList = .bundled,
         gikun: GikunHints = .bundled,
-        store: OverrideStore? = nil
+        store: OverrideStore? = nil,
+        disambiguator: (any ReadingDisambiguator)? = nil
     ) {
         self.analyzer = analyzer
         self.numbers = numbers
         self.exceptions = exceptions
         self.gikun = gikun
         self.store = store
+        self.disambiguator = disambiguator
     }
 
     /// The base tier: MeCab with the pack's dictionary and lists.
     /// Throws if the dictionary cannot be opened.
-    public init(pack: DictionaryPack, store: OverrideStore? = nil) throws {
+    public init(
+        pack: DictionaryPack, store: OverrideStore? = nil, disambiguator: (any ReadingDisambiguator)? = nil
+    ) throws {
         self.init(
             analyzer: try MecabAnalyzer(dictionary: pack.folder), exceptions: pack.exceptions, gikun: pack.gikun,
-            store: store)
+            store: store, disambiguator: disambiguator)
     }
 
     /// Shown in the scorer's report.
@@ -77,8 +84,27 @@ public struct RomajiEngine: Sendable {
         let excepted = exceptions.apply(tokens).map { (token: gikun.apply($0.token), proposal: $0.proposal) }
         var items = RubyApplier.apply(parsed.annotations + ruby, to: excepted)
 
-        // The song's own fixes, where the word is still what it was.
+        // What the surroundings say about words with more than one
+        // reading. A stretch whose reading is written in the lyrics is
+        // left as it is.
         let characters = Array(text)
+        for pick in disambiguator?.picks(for: items.map(\.token), in: text) ?? [] {
+            guard pick.range.lowerBound >= 0, pick.range.upperBound <= characters.count, !pick.range.isEmpty,
+                !items.contains(where: { item in
+                    item.token.range.overlaps(pick.range)
+                        && item.proposals.contains { $0.source > ReadingSource.classifier }
+                })
+            else { continue }
+            items = Self.cover(pick.range, in: items)
+            guard let index = items.firstIndex(where: { $0.token.range == pick.range }) else { continue }
+            for candidate in pick.candidates where !items[index].token.candidates.contains(candidate) {
+                items[index].token.candidates.append(candidate)
+            }
+            items[index].proposals.append(
+                ReadingProposal(reading: pick.reading, source: .classifier, needsReview: pick.needsReview))
+        }
+
+        // The song's own fixes, where the word is still what it was.
         for o in overrides.forLine(lineIndex) {
             guard o.range.lowerBound >= 0, o.range.upperBound <= characters.count,
                 String(characters[o.range]) == o.surface

@@ -34,6 +34,9 @@ if let pack = await packs.installed {
   another way marked for review (`gikun-hints.json`).
 - **Furigana in the lyrics** always wins, in four spellings: `運命(さだめ)`, `運命（さだめ）`,
   `|運命《さだめ》`, `{運命|さだめ}`.
+- **A place for your own picker** (`ReadingDisambiguator`): asked once per line for readings
+  that depend on the words around a word, taken over the dictionary and under furigana and
+  fixes. The package ships none.
 - **Fixes per song** (`OverrideStore`), kept on the device and marked stale when the lyrics
   change.
 - **Four spellings** (`RomajiPreset`): sing-along (toukyou), learner (tōkyō), official 2025,

@@ -327,3 +327,49 @@ import Testing
         func add(_ key: String) { keys.append(key) }
     }
 }
+
+@Suite("Picks from the surroundings")
+struct DisambiguatorTests {
+    /// Reads 人気 as ひとけ wherever it stands, and offers the other
+    /// reading.
+    struct Deserted: ReadingDisambiguator {
+        var needsReview = false
+        func picks(for tokens: [LyricToken], in line: String) -> [ReadingPick] {
+            tokens.filter { $0.surface == "人気" }.map {
+                ReadingPick(range: $0.range, reading: "ヒトケ", needsReview: needsReview, candidates: ["ニンキ"])
+            }
+        }
+    }
+
+    private func engine(_ picker: any ReadingDisambiguator) -> RomajiEngine {
+        RomajiEngine(
+            analyzer: TestSupport.engine.analyzer, exceptions: TestSupport.engine.exceptions,
+            gikun: TestSupport.engine.gikun, disambiguator: picker)
+    }
+
+    @Test("A pick wins over the dictionary and keeps the other reading on offer")
+    func pickWins() throws {
+        let line = engine(Deserted()).romanize(line: "人気のない公園")
+        let word = try #require(line.tokens.first { $0.surface == "人気" })
+        #expect(word.resolved.source == .classifier)
+        #expect(line.kana.hasPrefix("ひとけ"))
+        #expect(!word.needsReview)
+        #expect(word.resolved.candidates.contains("ニンキ"))
+    }
+
+    @Test("A pick that is a guess leaves the word marked")
+    func guessIsMarked() throws {
+        let line = engine(Deserted(needsReview: true)).romanize(line: "人気のない公園")
+        #expect(try #require(line.tokens.first { $0.surface == "人気" }).needsReview)
+    }
+
+    @Test("Furigana in the lyrics and the listener's fix stand over a pick")
+    func writtenReadingStands() {
+        let written = engine(Deserted()).romanize(line: "人気(にんき)のない公園")
+        #expect(written.kana.hasPrefix("にんき"))
+        let fix = ReadingOverride(line: 0, range: 0..<2, surface: "人気", reading: "ニンキ", lyricsHash: "")
+        let fixed = engine(Deserted()).romanize(
+            line: "人気のない公園", overrides: SongOverrides(overrides: [fix], lyricsHash: "", version: 1))
+        #expect(fixed.kana.hasPrefix("にんき"))
+    }
+}
