@@ -1,0 +1,555 @@
+{
+ "schema": "romaji-readings-v1",
+ "categories": [
+  "basic",
+  "compound",
+  "gikun_ruby",
+  "gikun_unmarked",
+  "heteronym",
+  "loanword",
+  "numbers",
+  "poetic"
+ ],
+ "cases": [
+  {
+   "id": "B01",
+   "category": "basic",
+   "text": "夜空に星が光る",
+   "expected": "よぞらにほしがひかる",
+   "focus": [
+    {
+     "surface": "夜空",
+     "reading": "よぞら"
+    }
+   ]
+  },
+  {
+   "id": "B02",
+   "category": "basic",
+   "text": "君の声が聞こえる",
+   "expected": "きみのこえがきこえる"
+  },
+  {
+   "id": "B03",
+   "category": "basic",
+   "text": "風に揺れる花びら",
+   "expected": "かぜにゆれるはなびら",
+   "focus": [
+    {
+     "surface": "花びら",
+     "reading": "はなびら"
+    }
+   ]
+  },
+  {
+   "id": "B04",
+   "category": "basic",
+   "text": "涙を拭いて歩き出す",
+   "expected": "なみだをふいてあるきだす"
+  },
+  {
+   "id": "B05",
+   "category": "basic",
+   "text": "遠い街の灯り",
+   "expected": "とおいまちのあかり",
+   "focus": [
+    {
+     "surface": "灯り",
+     "reading": "あかり"
+    }
+   ]
+  },
+  {
+   "id": "B06",
+   "category": "basic",
+   "text": "僕らは今を生きている",
+   "expected": "ぼくらはいまをいきている",
+   "focus": [
+    {
+     "surface": "生き",
+     "reading": "いき"
+    }
+   ]
+  },
+  {
+   "id": "B07",
+   "category": "basic",
+   "text": "青い海と白い雲",
+   "expected": "あおいうみとしろいくも"
+  },
+  {
+   "id": "B08",
+   "category": "basic",
+   "text": "冷たい雨が降り続く",
+   "expected": "つめたいあめがふりつづく"
+  },
+  {
+   "id": "B09",
+   "category": "basic",
+   "text": "心の奥で叫んでいる",
+   "expected": "こころのおくでさけんでいる"
+  },
+  {
+   "id": "B10",
+   "category": "basic",
+   "text": "夢の続きを見せて",
+   "expected": "ゆめのつづきをみせて"
+  },
+  {
+   "id": "H01",
+   "category": "heteronym",
+   "text": "今日は何をしようか",
+   "expected": "きょうはなにをしようか",
+   "focus": [
+    {
+     "surface": "今日",
+     "reading": "きょう"
+    },
+    {
+     "surface": "何",
+     "reading": "なに"
+    }
+   ]
+  },
+  {
+   "id": "H02",
+   "category": "heteronym",
+   "text": "何度でも立ち上がる",
+   "expected": "なんどでもたちあがる",
+   "focus": [
+    {
+     "surface": "何度",
+     "reading": "なんど"
+    }
+   ]
+  },
+  {
+   "id": "H03",
+   "category": "heteronym",
+   "text": "一人で帰る道",
+   "expected": "ひとりでかえるみち",
+   "focus": [
+    {
+     "surface": "一人",
+     "reading": "ひとり"
+    }
+   ]
+  },
+  {
+   "id": "H04",
+   "category": "heteronym",
+   "text": "明日の朝に会おう",
+   "expected": "あしたのあさにあおう",
+   "alternatives": [
+    "あすのあさにあおう"
+   ],
+   "focus": [
+    {
+     "surface": "明日",
+     "reading": "あした",
+     "alternatives": [
+      "あす"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "H05",
+   "category": "heteronym",
+   "text": "上手に笑えない",
+   "expected": "じょうずにわらえない",
+   "focus": [
+    {
+     "surface": "上手",
+     "reading": "じょうず"
+    }
+   ]
+  },
+  {
+   "id": "H06",
+   "category": "heteronym",
+   "text": "大人になった日",
+   "expected": "おとなになったひ",
+   "focus": [
+    {
+     "surface": "大人",
+     "reading": "おとな"
+    },
+    {
+     "surface": "日",
+     "reading": "ひ"
+    }
+   ]
+  },
+  {
+   "id": "H07",
+   "category": "heteronym",
+   "text": "二人の時間",
+   "expected": "ふたりのじかん",
+   "focus": [
+    {
+     "surface": "二人",
+     "reading": "ふたり"
+    }
+   ]
+  },
+  {
+   "id": "H08",
+   "category": "heteronym",
+   "text": "月日が流れて",
+   "expected": "つきひがながれて",
+   "focus": [
+    {
+     "surface": "月日",
+     "reading": "つきひ"
+    }
+   ]
+  },
+  {
+   "id": "H09",
+   "category": "heteronym",
+   "text": "生まれた場所へ",
+   "expected": "うまれたばしょへ",
+   "focus": [
+    {
+     "surface": "生まれ",
+     "reading": "うまれ"
+    }
+   ]
+  },
+  {
+   "id": "H10",
+   "category": "heteronym",
+   "text": "下手な歌を歌う",
+   "expected": "へたなうたをうたう",
+   "focus": [
+    {
+     "surface": "下手",
+     "reading": "へた"
+    }
+   ]
+  },
+  {
+   "id": "H11",
+   "category": "heteronym",
+   "text": "色々な形の愛",
+   "expected": "いろいろなかたちのあい",
+   "focus": [
+    {
+     "surface": "形",
+     "reading": "かたち"
+    }
+   ]
+  },
+  {
+   "id": "H12",
+   "category": "heteronym",
+   "text": "人気のない公園",
+   "expected": "ひとけのないこうえん",
+   "focus": [
+    {
+     "surface": "人気",
+     "reading": "ひとけ"
+    }
+   ],
+   "note": "classic context case: にんき is wrong here"
+  },
+  {
+   "id": "H13",
+   "category": "heteronym",
+   "text": "風車が回る",
+   "expected": "かざぐるまがまわる",
+   "alternatives": [
+    "ふうしゃがまわる"
+   ],
+   "focus": [
+    {
+     "surface": "風車",
+     "reading": "かざぐるま",
+     "alternatives": [
+      "ふうしゃ"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "H14",
+   "category": "heteronym",
+   "text": "一日中ずっと",
+   "expected": "いちにちじゅうずっと",
+   "focus": [
+    {
+     "surface": "一日中",
+     "reading": "いちにちじゅう"
+    }
+   ]
+  },
+  {
+   "id": "N01",
+   "category": "numbers",
+   "text": "三月の雨",
+   "expected": "さんがつのあめ",
+   "focus": [
+    {
+     "surface": "三月",
+     "reading": "さんがつ"
+    }
+   ]
+  },
+  {
+   "id": "N02",
+   "category": "numbers",
+   "text": "十年後の約束",
+   "expected": "じゅうねんごのやくそく",
+   "focus": [
+    {
+     "surface": "十年後",
+     "reading": "じゅうねんご"
+    }
+   ]
+  },
+  {
+   "id": "N03",
+   "category": "numbers",
+   "text": "100回目のキス",
+   "expected": "ひゃっかいめのきす",
+   "note": "digits: the analyzer gives no reading for 100; needs a number reader"
+  },
+  {
+   "id": "L01",
+   "category": "loanword",
+   "text": "ラジオから流れるメロディー",
+   "expected": "らじおからながれるめろでぃー"
+  },
+  {
+   "id": "L02",
+   "category": "loanword",
+   "text": "Loveを叫べ",
+   "expected": "loveをさけべ",
+   "note": "Latin passes through unchanged"
+  },
+  {
+   "id": "G01",
+   "category": "gikun_ruby",
+   "text": "運命の人",
+   "expected": "さだめのひと",
+   "ruby": [
+    {
+     "surface": "運命",
+     "reading": "さだめ"
+    }
+   ],
+   "focus": [
+    {
+     "surface": "運命",
+     "reading": "さだめ"
+    }
+   ]
+  },
+  {
+   "id": "G02",
+   "category": "gikun_ruby",
+   "text": "本気で愛して",
+   "expected": "まじであいして",
+   "ruby": [
+    {
+     "surface": "本気",
+     "reading": "まじ"
+    }
+   ],
+   "focus": [
+    {
+     "surface": "本気",
+     "reading": "まじ"
+    }
+   ]
+  },
+  {
+   "id": "G03",
+   "category": "gikun_ruby",
+   "text": "未来を信じて",
+   "expected": "あしたをしんじて",
+   "ruby": [
+    {
+     "surface": "未来",
+     "reading": "あした"
+    }
+   ],
+   "focus": [
+    {
+     "surface": "未来",
+     "reading": "あした"
+    }
+   ]
+  },
+  {
+   "id": "G04",
+   "category": "gikun_ruby",
+   "text": "瞬間を止めて",
+   "expected": "ときをとめて",
+   "ruby": [
+    {
+     "surface": "瞬間",
+     "reading": "とき"
+    }
+   ],
+   "focus": [
+    {
+     "surface": "瞬間",
+     "reading": "とき"
+    }
+   ]
+  },
+  {
+   "id": "G05",
+   "category": "gikun_ruby",
+   "text": "地球の裏側",
+   "expected": "ほしのうらがわ",
+   "ruby": [
+    {
+     "surface": "地球",
+     "reading": "ほし"
+    }
+   ],
+   "focus": [
+    {
+     "surface": "地球",
+     "reading": "ほし"
+    }
+   ]
+  },
+  {
+   "id": "G06",
+   "category": "gikun_ruby",
+   "text": "宇宙の果て",
+   "expected": "そらのはて",
+   "ruby": [
+    {
+     "surface": "宇宙",
+     "reading": "そら"
+    }
+   ],
+   "focus": [
+    {
+     "surface": "宇宙",
+     "reading": "そら"
+    }
+   ]
+  },
+  {
+   "id": "U01",
+   "category": "gikun_unmarked",
+   "text": "運命の人",
+   "expected": "うんめいのひと",
+   "focus": [
+    {
+     "surface": "運命",
+     "reading": "うんめい"
+    }
+   ],
+   "note": "no ruby: the sung reading may be さだめ but nothing in the text says so. Expect the dictionary reading; the app should mark the word for review (audio check)."
+  },
+  {
+   "id": "P01",
+   "category": "poetic",
+   "text": "去りゆく季節",
+   "expected": "さりゆくきせつ"
+  },
+  {
+   "id": "P02",
+   "category": "poetic",
+   "text": "永遠に続く",
+   "expected": "えいえんにつづく",
+   "focus": [
+    {
+     "surface": "永遠",
+     "reading": "えいえん"
+    }
+   ]
+  },
+  {
+   "id": "P03",
+   "category": "poetic",
+   "text": "儚い夢",
+   "expected": "はかないゆめ",
+   "focus": [
+    {
+     "surface": "儚い",
+     "reading": "はかない"
+    }
+   ]
+  },
+  {
+   "id": "P04",
+   "category": "poetic",
+   "text": "刹那の光",
+   "expected": "せつなのひかり",
+   "focus": [
+    {
+     "surface": "刹那",
+     "reading": "せつな"
+    }
+   ]
+  },
+  {
+   "id": "P05",
+   "category": "poetic",
+   "text": "茜色の空",
+   "expected": "あかねいろのそら",
+   "focus": [
+    {
+     "surface": "茜色",
+     "reading": "あかねいろ"
+    }
+   ]
+  },
+  {
+   "id": "C01",
+   "category": "compound",
+   "text": "雨雲が広がる",
+   "expected": "あまぐもがひろがる",
+   "focus": [
+    {
+     "surface": "雨雲",
+     "reading": "あまぐも"
+    }
+   ]
+  },
+  {
+   "id": "C02",
+   "category": "compound",
+   "text": "花火大会の夜",
+   "expected": "はなびたいかいのよる"
+  },
+  {
+   "id": "C03",
+   "category": "compound",
+   "text": "人々の笑顔",
+   "expected": "ひとびとのえがお",
+   "focus": [
+    {
+     "surface": "人々",
+     "reading": "ひとびと"
+    }
+   ]
+  },
+  {
+   "id": "C04",
+   "category": "compound",
+   "text": "東京駅で待つ",
+   "expected": "とうきょうえきでまつ"
+  },
+  {
+   "id": "C05",
+   "category": "compound",
+   "text": "手紙を書く",
+   "expected": "てがみをかく",
+   "focus": [
+    {
+     "surface": "手紙",
+     "reading": "てがみ"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,773 @@
+{
+ "schema": "romaji-renderer-v1",
+ "presets": [
+  "singalong",
+  "learner",
+  "official",
+  "kunrei"
+ ],
+ "cases": [
+  {
+   "id": "R01",
+   "note": "gikun from ruby beats dictionary; を as particle",
+   "tokens": [
+    {
+     "surface": "運命",
+     "reading": "ウンメイ",
+     "pos": "noun"
+    },
+    {
+     "surface": "の",
+     "reading": "ノ",
+     "pos": "particle"
+    },
+    {
+     "surface": "夜",
+     "reading": "ヨル",
+     "pos": "noun"
+    },
+    {
+     "surface": "に",
+     "reading": "ニ",
+     "pos": "particle"
+    },
+    {
+     "surface": "君",
+     "reading": "キミ",
+     "pos": "noun"
+    },
+    {
+     "surface": "を",
+     "reading": "ヲ",
+     "pos": "particle"
+    },
+    {
+     "surface": "探す",
+     "reading": "サガス",
+     "pos": "verb"
+    }
+   ],
+   "expected": {
+    "singalong": "sadame no yoru ni kimi o sagasu",
+    "learner": "sadame no yoru ni kimi o sagasu",
+    "official": "sadame no yoru ni kimi o sagasu",
+    "kunrei": "sadame no yoru ni kimi o sagasu"
+   },
+   "overrides": [
+    {
+     "token": 0,
+     "reading": "サダメ",
+     "source": "ruby"
+    }
+   ]
+  },
+  {
+   "id": "R02",
+   "note": "user fix beats classifier; audio+ruby agree; へ particle; word-final ん before separate word gets no apostrophe",
+   "tokens": [
+    {
+     "surface": "本気",
+     "reading": "ホンキ",
+     "pos": "noun"
+    },
+    {
+     "surface": "で",
+     "reading": "デ",
+     "pos": "particle"
+    },
+    {
+     "surface": "笑う",
+     "reading": "ワラウ",
+     "pos": "verb"
+    },
+    {
+     "surface": "瞬間",
+     "reading": "シュンカン",
+     "pos": "noun"
+    },
+    {
+     "surface": "へ",
+     "reading": "ヘ",
+     "pos": "particle"
+    }
+   ],
+   "expected": {
+    "singalong": "maji de warau toki e",
+    "learner": "maji de warau toki e",
+    "official": "maji de warau toki e",
+    "kunrei": "mazi de warau toki e"
+   },
+   "overrides": [
+    {
+     "token": 0,
+     "reading": "ホンキ",
+     "source": "classifier"
+    },
+    {
+     "token": 0,
+     "reading": "マジ",
+     "source": "user"
+    },
+    {
+     "token": 3,
+     "reading": "トキ",
+     "source": "audio"
+    },
+    {
+     "token": 3,
+     "reading": "トキ",
+     "source": "ruby"
+    }
+   ]
+  },
+  {
+   "id": "R03",
+   "note": "dictionary-only: no overrides, ん before particle stays plain n",
+   "tokens": [
+    {
+     "surface": "本気",
+     "reading": "ホンキ",
+     "pos": "noun"
+    },
+    {
+     "surface": "で",
+     "reading": "デ",
+     "pos": "particle"
+    },
+    {
+     "surface": "笑う",
+     "reading": "ワラウ",
+     "pos": "verb"
+    },
+    {
+     "surface": "瞬間",
+     "reading": "シュンカン",
+     "pos": "noun"
+    },
+    {
+     "surface": "へ",
+     "reading": "ヘ",
+     "pos": "particle"
+    }
+   ],
+   "expected": {
+    "singalong": "honki de warau shunkan e",
+    "learner": "honki de warau shunkan e",
+    "official": "honki de warau shunkan e",
+    "kunrei": "honki de warau syunkan e"
+   }
+  },
+  {
+   "id": "R04",
+   "note": "ou / oo long vowels; は particle; attached て",
+   "tokens": [
+    {
+     "surface": "東京",
+     "reading": "トウキョウ",
+     "pos": "noun"
+    },
+    {
+     "surface": "の",
+     "reading": "ノ",
+     "pos": "particle"
+    },
+    {
+     "surface": "空",
+     "reading": "ソラ",
+     "pos": "noun"
+    },
+    {
+     "surface": "は",
+     "reading": "ハ",
+     "pos": "particle"
+    },
+    {
+     "surface": "遠く",
+     "reading": "トオク",
+     "pos": "adj"
+    },
+    {
+     "surface": "て",
+     "reading": "テ",
+     "pos": "particle",
+     "attach": true
+    }
+   ],
+   "expected": {
+    "singalong": "toukyou no sora wa tookute",
+    "learner": "tōkyō no sora wa tōkute",
+    "official": "toukyou no sora wa tookute",
+    "kunrei": "tôkyô no sora wa tôkute"
+   }
+  },
+  {
+   "id": "R05",
+   "note": "n before p stays n; punctuation; sokuon across attached ending",
+   "tokens": [
+    {
+     "surface": "先輩",
+     "reading": "センパイ",
+     "pos": "noun"
+    },
+    {
+     "surface": "、",
+     "reading": "、",
+     "pos": "symbol",
+     "attach": true
+    },
+    {
+     "surface": "ちょっと",
+     "reading": "チョット",
+     "pos": "adv"
+    },
+    {
+     "surface": "待っ",
+     "reading": "マッ",
+     "pos": "verb"
+    },
+    {
+     "surface": "て",
+     "reading": "テ",
+     "pos": "particle",
+     "attach": true
+    }
+   ],
+   "expected": {
+    "singalong": "senpai, chotto matte",
+    "learner": "senpai, chotto matte",
+    "official": "senpai, chotto matte",
+    "kunrei": "senpai, tyotto matte"
+   }
+  },
+  {
+   "id": "R06",
+   "note": "n' before vowel; っち = tch (Hepburn) vs cch (official 2025)",
+   "tokens": [
+    {
+     "surface": "原因",
+     "reading": "ゲンイン",
+     "pos": "noun"
+    },
+    {
+     "surface": "は",
+     "reading": "ハ",
+     "pos": "particle"
+    },
+    {
+     "surface": "きっと",
+     "reading": "キット",
+     "pos": "adv"
+    },
+    {
+     "surface": "抹茶",
+     "reading": "マッチャ",
+     "pos": "noun"
+    }
+   ],
+   "expected": {
+    "singalong": "gen'in wa kitto matcha",
+    "learner": "gen'in wa kitto matcha",
+    "official": "gen'in wa kitto maccha",
+    "kunrei": "gen'in wa kitto mattya"
+   }
+  },
+  {
+   "id": "R07",
+   "note": "katakana long mark, ティ, ファ, ヴォ; attached な",
+   "tokens": [
+    {
+     "surface": "パーティー",
+     "reading": "パーティー",
+     "pos": "noun"
+    },
+    {
+     "surface": "で",
+     "reading": "デ",
+     "pos": "particle"
+    },
+    {
+     "surface": "ファンキー",
+     "reading": "ファンキー",
+     "pos": "noun"
+    },
+    {
+     "surface": "な",
+     "reading": "ナ",
+     "pos": "aux",
+     "attach": true
+    },
+    {
+     "surface": "ヴォーカル",
+     "reading": "ヴォーカル",
+     "pos": "noun"
+    }
+   ],
+   "expected": {
+    "singalong": "paatii de fankiina vookaru",
+    "learner": "pātī de fankīna vōkaru",
+    "official": "paatii de fankiina vookaru",
+    "kunrei": "pâtî de fankîna vôkaru"
+   }
+  },
+  {
+   "id": "R08",
+   "note": "noun ou -> long; adjective oo -> long; ei never long; verb-final う not long",
+   "tokens": [
+    {
+     "surface": "王様",
+     "reading": "オウサマ",
+     "pos": "noun"
+    },
+    {
+     "surface": "と",
+     "reading": "ト",
+     "pos": "particle"
+    },
+    {
+     "surface": "大きい",
+     "reading": "オオキイ",
+     "pos": "adj"
+    },
+    {
+     "surface": "映画",
+     "reading": "エイガ",
+     "pos": "noun"
+    },
+    {
+     "surface": "を",
+     "reading": "ヲ",
+     "pos": "particle"
+    },
+    {
+     "surface": "思う",
+     "reading": "オモウ",
+     "pos": "verb"
+    }
+   ],
+   "expected": {
+    "singalong": "ousama to ookii eiga o omou",
+    "learner": "ōsama to ōkii eiga o omou",
+    "official": "ousama to ookii eiga o omou",
+    "kunrei": "ôsama to ôkii eiga o omou"
+   }
+  },
+  {
+   "id": "R09",
+   "note": "classifier fixes 今日; sokuon into attached て; attached いる",
+   "tokens": [
+    {
+     "surface": "今日",
+     "reading": "コンニチ",
+     "pos": "noun"
+    },
+    {
+     "surface": "も",
+     "reading": "モ",
+     "pos": "particle"
+    },
+    {
+     "surface": "雪",
+     "reading": "ユキ",
+     "pos": "noun"
+    },
+    {
+     "surface": "が",
+     "reading": "ガ",
+     "pos": "particle"
+    },
+    {
+     "surface": "降っ",
+     "reading": "フッ",
+     "pos": "verb"
+    },
+    {
+     "surface": "て",
+     "reading": "テ",
+     "pos": "particle",
+     "attach": true
+    },
+    {
+     "surface": "いる",
+     "reading": "イル",
+     "pos": "verb",
+     "attach": true
+    }
+   ],
+   "expected": {
+    "singalong": "kyou mo yuki ga futteiru",
+    "learner": "kyō mo yuki ga futteiru",
+    "official": "kyou mo yuki ga futteiru",
+    "kunrei": "kyô mo yuki ga hutteiru"
+   },
+   "overrides": [
+    {
+     "token": 0,
+     "reading": "キョウ",
+     "source": "classifier"
+    }
+   ]
+  },
+  {
+   "id": "R10",
+   "note": "n before b/m stays n (modern Hepburn); n' before y; n' before a",
+   "tokens": [
+    {
+     "surface": "新聞",
+     "reading": "シンブン",
+     "pos": "noun"
+    },
+    {
+     "surface": "金曜日",
+     "reading": "キンヨウビ",
+     "pos": "noun"
+    },
+    {
+     "surface": "恋愛",
+     "reading": "レンアイ",
+     "pos": "noun"
+    }
+   ],
+   "expected": {
+    "singalong": "shinbun kin'youbi ren'ai",
+    "learner": "shinbun kin'yōbi ren'ai",
+    "official": "shinbun kin'youbi ren'ai",
+    "kunrei": "sinbun kin'yôbi ren'ai"
+   }
+  },
+  {
+   "id": "R11",
+   "note": "は / へ inside nouns are NOT particles",
+   "tokens": [
+    {
+     "surface": "花",
+     "reading": "ハナ",
+     "pos": "noun"
+    },
+    {
+     "surface": "は",
+     "reading": "ハ",
+     "pos": "particle"
+    },
+    {
+     "surface": "部屋",
+     "reading": "ヘヤ",
+     "pos": "noun"
+    },
+    {
+     "surface": "へ",
+     "reading": "ヘ",
+     "pos": "particle"
+    },
+    {
+     "surface": "帰る",
+     "reading": "カエル",
+     "pos": "verb"
+    }
+   ],
+   "expected": {
+    "singalong": "hana wa heya e kaeru",
+    "learner": "hana wa heya e kaeru",
+    "official": "hana wa heya e kaeru",
+    "kunrei": "hana wa heya e kaeru"
+   }
+  },
+  {
+   "id": "R12",
+   "note": "word-final っ in an exclamation is dropped; standalone ヴ",
+   "tokens": [
+    {
+     "surface": "あっ",
+     "reading": "アッ",
+     "pos": "interj"
+    },
+    {
+     "surface": "、",
+     "reading": "、",
+     "pos": "symbol",
+     "attach": true
+    },
+    {
+     "surface": "ヴ",
+     "reading": "ヴ",
+     "pos": "noun"
+    }
+   ],
+   "expected": {
+    "singalong": "a, vu",
+    "learner": "a, vu",
+    "official": "a, vu",
+    "kunrei": "a, vu"
+   }
+  },
+  {
+   "id": "R13",
+   "note": "small-kana combos: じゃ, しょ, ちゅ; ii stays ii",
+   "tokens": [
+    {
+     "surface": "邪魔",
+     "reading": "ジャマ",
+     "pos": "noun"
+    },
+    {
+     "surface": "しょう",
+     "reading": "ショウ",
+     "pos": "aux"
+    },
+    {
+     "surface": "中",
+     "reading": "チュウ",
+     "pos": "noun"
+    },
+    {
+     "surface": "新しい",
+     "reading": "アタラシイ",
+     "pos": "adj"
+    }
+   ],
+   "expected": {
+    "singalong": "jama shou chuu atarashii",
+    "learner": "jama shō chū atarashii",
+    "official": "jama shou chuu atarashii",
+    "kunrei": "zyama syô tyû atarasii"
+   }
+  },
+  {
+   "id": "R14",
+   "note": "verb-final う after o is not long even though o+u",
+   "tokens": [
+    {
+     "surface": "歌う",
+     "reading": "ウタウ",
+     "pos": "verb"
+    },
+    {
+     "surface": "向かう",
+     "reading": "ムカウ",
+     "pos": "verb"
+    },
+    {
+     "surface": "思う",
+     "reading": "オモウ",
+     "pos": "verb"
+    }
+   ],
+   "expected": {
+    "singalong": "utau mukau omou",
+    "learner": "utau mukau omou",
+    "official": "utau mukau omou",
+    "kunrei": "utau mukau omou"
+   }
+  },
+  {
+   "id": "R15",
+   "note": "ruby beats audio; full-width question mark",
+   "tokens": [
+    {
+     "surface": "未来",
+     "reading": "ミライ",
+     "pos": "noun"
+    },
+    {
+     "surface": "は",
+     "reading": "ハ",
+     "pos": "particle"
+    },
+    {
+     "surface": "どこ",
+     "reading": "ドコ",
+     "pos": "pron"
+    },
+    {
+     "surface": "？",
+     "reading": "？",
+     "pos": "symbol",
+     "attach": true
+    }
+   ],
+   "expected": {
+    "singalong": "ashita wa doko?",
+    "learner": "ashita wa doko?",
+    "official": "ashita wa doko?",
+    "kunrei": "asita wa doko?"
+   },
+   "overrides": [
+    {
+     "token": 0,
+     "reading": "ミライ",
+     "source": "audio"
+    },
+    {
+     "token": 0,
+     "reading": "アシタ",
+     "source": "ruby"
+    }
+   ]
+  },
+  {
+   "id": "R16",
+   "note": "Latin text passes through unchanged",
+   "tokens": [
+    {
+     "surface": "Love",
+     "reading": "Love",
+     "pos": "foreign"
+    },
+    {
+     "surface": "を",
+     "reading": "ヲ",
+     "pos": "particle"
+    },
+    {
+     "surface": "叫べ",
+     "reading": "サケベ",
+     "pos": "verb"
+    }
+   ],
+   "expected": {
+    "singalong": "Love o sakebe",
+    "learner": "Love o sakebe",
+    "official": "Love o sakebe",
+    "kunrei": "Love o sakebe"
+   }
+  },
+  {
+   "id": "R17",
+   "note": "Latin words keep their vowels in every preset: oo/ou in a Latin token is never a long vowel",
+   "tokens": [
+    {
+     "surface": "You",
+     "reading": "You",
+     "pos": "foreign"
+    },
+    {
+     "surface": "too",
+     "reading": "too",
+     "pos": "foreign"
+    },
+    {
+     "surface": "soon",
+     "reading": "soon",
+     "pos": "foreign"
+    },
+    {
+     "surface": "と",
+     "reading": "ト",
+     "pos": "particle"
+    },
+    {
+     "surface": "言う",
+     "reading": "イウ",
+     "pos": "verb"
+    }
+   ],
+   "expected": {
+    "singalong": "You too soon to iu",
+    "learner": "You too soon to iu",
+    "official": "You too soon to iu",
+    "kunrei": "You too soon to iu"
+   }
+  },
+  {
+   "id": "R18",
+   "note": "more Japanese punctuation is mapped: double brackets, full-width parentheses, wave dash",
+   "tokens": [
+    {
+     "surface": "『",
+     "reading": "『",
+     "pos": "symbol"
+    },
+    {
+     "surface": "夢",
+     "reading": "ユメ",
+     "pos": "noun",
+     "attach": true
+    },
+    {
+     "surface": "』",
+     "reading": "』",
+     "pos": "symbol",
+     "attach": true
+    },
+    {
+     "surface": "（",
+     "reading": "（",
+     "pos": "symbol"
+    },
+    {
+     "surface": "嘘",
+     "reading": "ウソ",
+     "pos": "noun",
+     "attach": true
+    },
+    {
+     "surface": "）",
+     "reading": "）",
+     "pos": "symbol",
+     "attach": true
+    },
+    {
+     "surface": "〜",
+     "reading": "〜",
+     "pos": "symbol",
+     "attach": true
+    }
+   ],
+   "expected": {
+    "singalong": "\"yume\" (uso)~",
+    "learner": "\"yume\" (uso)~",
+    "official": "\"yume\" (uso)~",
+    "kunrei": "\"yume\" (uso)~"
+   }
+  },
+  {
+   "id": "R19",
+   "note": "volitional う attached to its stem is a long ō with the stem's o, also after a stem that ends in oo; a verb's own final う stays",
+   "tokens": [
+    {
+     "surface": "行こ",
+     "reading": "イコ",
+     "pos": "verb"
+    },
+    {
+     "surface": "う",
+     "reading": "ウ",
+     "pos": "aux",
+     "attach": true
+    },
+    {
+     "surface": "思お",
+     "reading": "オモオ",
+     "pos": "verb"
+    },
+    {
+     "surface": "う",
+     "reading": "ウ",
+     "pos": "aux",
+     "attach": true
+    },
+    {
+     "surface": "でしょ",
+     "reading": "デショ",
+     "pos": "aux"
+    },
+    {
+     "surface": "う",
+     "reading": "ウ",
+     "pos": "aux",
+     "attach": true
+    },
+    {
+     "surface": "問う",
+     "reading": "トウ",
+     "pos": "verb"
+    }
+   ],
+   "expected": {
+    "singalong": "ikou omoou deshou tou",
+    "learner": "ikō omoō deshō tou",
+    "official": "ikou omoou deshou tou",
+    "kunrei": "ikô omoô desyô tou"
+   }
+  }
+ ]
+}

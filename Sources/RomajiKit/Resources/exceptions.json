@@ -1,0 +1,25 @@
+{
+ "version": 1,
+ "entries": [
+  {"surface": "行っ", "reading": "イッ", "note": "IPAdic takes 行った for 行う (おこなった); in lyrics it is 行く"},
+  {"surface": "身体", "reading": "カラダ", "note": "しんたい in prose, からだ in song"},
+  {"surface": "彷徨う", "reading": "サマヨウ", "pos": "verb", "note": "cut as 彷徨 (ほうこう) + う"},
+  {"surface": "彷徨い", "reading": "サマヨイ", "pos": "verb"},
+  {"surface": "彷徨っ", "reading": "サマヨッ", "pos": "verb"},
+  {"surface": "彷徨わ", "reading": "サマヨワ", "pos": "verb"},
+  {"surface": "彷徨え", "reading": "サマヨエ", "pos": "verb"},
+  {"surface": "揺蕩う", "reading": "タユタウ", "pos": "verb", "note": "not in the dictionary"},
+  {"surface": "揺蕩い", "reading": "タユタイ", "pos": "verb"},
+  {"surface": "微笑み", "reading": "ホホエミ", "pos": "noun", "note": "cut as 微 (び) + 笑み"},
+  {"surface": "微笑む", "reading": "ホホエム", "pos": "verb"},
+  {"surface": "微笑ん", "reading": "ホホエン", "pos": "verb"},
+  {"surface": "明後日", "reading": "アサッテ", "note": "みょうごにち is the formal reading"},
+  {"surface": "碧い", "reading": "アオイ", "pos": "adj", "note": "cut as 碧 (へき) + い"},
+  {"surface": "碧く", "reading": "アオク", "pos": "adj"},
+  {"surface": "側", "reading": "ソバ", "previous": ["の"], "next": ["に", "で", "へ", "を", "から", "まで"], "note": "君の側に: そば, not がわ"},
+  {"surface": "中", "reading": "ジュウ", "previous": ["一日", "1日", "一年", "1年", "一晩", "一生", "世界", "日本", "体", "身体", "家", "街", "町", "国", "部屋", "年", "夜", "顔", "そこら"], "note": "throughout: いちにちじゅう, not ちゅう"},
+  {"surface": "ひとりぼっち", "reading": "ヒトリボッチ", "pos": "noun", "pin": true, "note": "cut as ひとり, ぼっ, ちの"},
+  {"surface": "独りぼっち", "reading": "ヒトリボッチ", "pos": "noun", "pin": true},
+  {"surface": "一人ぼっち", "reading": "ヒトリボッチ", "pos": "noun", "pin": true}
+ ]
+}

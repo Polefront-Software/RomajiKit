@@ -1,0 +1,14 @@
+name: Test
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      # The reference checks and the Swift tests, with the dictionary as
+      # the package has it.
+      - run: scripts/romaji-eval.sh --fast
