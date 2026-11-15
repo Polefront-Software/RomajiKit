@@ -82,12 +82,58 @@ public struct SongOverrides: Sendable, Hashable {
     public func forLine(_ line: Int) -> [ReadingOverride] { overrides.filter { $0.line == line } }
 }
 
+/// A song's fixes as they travel between a listener's devices: the
+/// readings set, and the places a reading was taken back from, so that
+/// a fix removed on one device does not come back from another.
+public struct SongFixes: Sendable, Equatable, Codable {
+    public var overrides: [ReadingOverride]
+    /// When a place's reading was taken back, by the override's id and source.
+    public var removed: [String: Date]
+
+    public init(overrides: [ReadingOverride] = [], removed: [String: Date] = [:]) {
+        self.overrides = overrides
+        self.removed = removed
+    }
+
+    public var isEmpty: Bool { overrides.isEmpty && removed.isEmpty }
+
+    /// Both devices' fixes as one: for each place, whatever was done
+    /// last, be it a reading set or one taken back.
+    public func merged(with other: SongFixes) -> SongFixes {
+        var newest: [String: ReadingOverride] = [:]
+        for override in overrides + other.overrides {
+            if let known = newest[override.place], known.modified >= override.modified { continue }
+            newest[override.place] = override
+        }
+        let gone = removed.merging(other.removed) { max($0, $1) }
+        var result = SongFixes()
+        for (place, override) in newest where gone[place].map({ override.modified > $0 }) ?? true {
+            result.overrides.append(override)
+        }
+        result.removed = gone.filter { place, when in newest[place].map { $0.modified <= when } ?? true }
+        result.overrides.sort { ($0.line, $0.range.lowerBound, $0.source.rawValue) < ($1.line, $1.range.lowerBound, $1.source.rawValue) }
+        return result
+    }
+}
+
+extension ReadingOverride {
+    /// Where the override sits and whose it is: one reading per place and source.
+    var place: String { "\(id)|\(source.rawValue)" }
+}
+
 /// Per-song reading fixes, kept in one file on the device. Never written
 /// to the song's tags, and never applied to another song.
+///
+/// A store can be kept the same on a listener's other devices: it says
+/// which song changed (`onChange`), gives that song's fixes (`fixes`),
+/// and takes another device's (`merge`).
 public actor OverrideStore {
     private struct SongRecord: Codable {
         var version: Int
         var overrides: [ReadingOverride]
+        var removed: [String: Date]?
+
+        var fixes: SongFixes { SongFixes(overrides: overrides, removed: removed ?? [:]) }
     }
 
     private struct File: Codable {
@@ -99,9 +145,44 @@ public actor OverrideStore {
     private var songs: [String: SongRecord] = [:]
     private var loaded = false
 
-    /// `fileURL` nil keeps everything in memory (tests, previews).
-    public init(fileURL: URL?) {
+    private let onChange: (@Sendable (_ song: String) -> Void)?
+
+    /// - Parameters:
+    ///   - fileURL: nil keeps everything in memory (tests, previews).
+    ///   - onChange: called with a song's key when its fixes were changed
+    ///     here; not when they came in through `merge`.
+    public init(fileURL: URL?, onChange: (@Sendable (_ song: String) -> Void)? = nil) {
         self.fileURL = fileURL
+        self.onChange = onChange
+    }
+
+    /// The keys of the songs with fixes, or with fixes taken back.
+    public var songKeys: [String] {
+        load()
+        return songs.keys.sorted()
+    }
+
+    /// A song's fixes, to hand to another device.
+    public func fixes(forKey song: String) -> SongFixes {
+        load()
+        return songs[song]?.fixes ?? SongFixes()
+    }
+
+    /// Takes in another device's fixes for a song. Returns what the song
+    /// has afterwards when that is more than the other device had, so
+    /// the caller can send it back; nil when the two now agree.
+    @discardableResult
+    public func merge(_ other: SongFixes, forKey song: String) -> SongFixes? {
+        load()
+        let here = songs[song]
+        let merged = (here?.fixes ?? SongFixes()).merged(with: other)
+        if merged != here?.fixes {
+            songs[song] = SongRecord(
+                version: (here?.version ?? 0) + 1, overrides: merged.overrides,
+                removed: merged.removed.isEmpty ? nil : merged.removed)
+            save()
+        }
+        return merged == other ? nil : merged
     }
 
     private func load() {
@@ -135,26 +216,34 @@ public actor OverrideStore {
     public func set(_ override: ReadingOverride, for song: SongIdentity) {
         load()
         var record = songs[song.key] ?? SongRecord(version: 0, overrides: [])
-        record.overrides.removeAll {
+        let replaced = record.overrides.filter {
             $0.line == override.line && $0.range.overlaps(override.range) && $0.source == override.source
         }
+        record.overrides.removeAll(where: replaced.contains)
         record.overrides.append(override)
         record.overrides.sort { ($0.line, $0.range.lowerBound) < ($1.line, $1.range.lowerBound) }
+        var removed = record.removed ?? [:]
+        for old in replaced { removed[old.place] = override.modified }
+        removed[override.place] = nil
+        record.removed = removed.isEmpty ? nil : removed
         record.version += 1
         songs[song.key] = record
         save()
+        onChange?(song.key)
     }
 
     /// Takes a reading back, so the word falls to the next source.
     public func remove(line: Int, range: Range<Int>, source: ReadingSource = .user, for song: SongIdentity) {
         load()
         guard var record = songs[song.key] else { return }
-        let before = record.overrides.count
-        record.overrides.removeAll { $0.line == line && $0.range == range && $0.source == source }
-        guard record.overrides.count != before else { return }
+        guard let gone = record.overrides.first(where: { $0.line == line && $0.range == range && $0.source == source })
+        else { return }
+        record.overrides.removeAll { $0 == gone }
+        record.removed = (record.removed ?? [:]).merging([gone.place: .now]) { _, new in new }
         record.version += 1
         songs[song.key] = record
         save()
+        onChange?(song.key)
     }
 
     /// After the user has looked at a stale reading and kept it.

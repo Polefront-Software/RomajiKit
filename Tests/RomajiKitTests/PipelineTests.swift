@@ -271,3 +271,59 @@ import Testing
         #expect(ThirdPartyNotices.text.contains("Taku Kudo"))
     }
 }
+
+@Suite struct FixSyncTests {
+    private let song = SongIdentity(musicBrainzRecordingID: nil, navidromeID: "song-1")
+
+    private func fix(_ reading: String, line: Int = 0, at seconds: TimeInterval) -> ReadingOverride {
+        ReadingOverride(
+            line: line, range: 0..<2, surface: "運命", reading: reading, lyricsHash: "h",
+            modified: Date(timeIntervalSince1970: seconds))
+    }
+
+    @Test func theLaterReadingWinsOnBothDevices() {
+        let phone = SongFixes(overrides: [fix("サダメ", at: 10)])
+        let pad = SongFixes(overrides: [fix("ウンメイ", at: 20), fix("アシタ", line: 3, at: 5)])
+        let merged = phone.merged(with: pad)
+        #expect(merged == pad.merged(with: phone))
+        #expect(merged.overrides.map(\.reading) == ["ウンメイ", "アシタ"])
+    }
+
+    @Test func aFixTakenBackDoesNotComeBack() async {
+        let phone = OverrideStore(fileURL: nil)
+        let pad = OverrideStore(fileURL: nil)
+        await phone.set(fix("サダメ", at: 10), for: song)
+        await pad.merge(await phone.fixes(forKey: song.key), forKey: song.key)
+        await pad.remove(line: 0, range: 0..<2, for: song)
+        // The phone hears of the removal, and has nothing to send back.
+        #expect(await phone.merge(await pad.fixes(forKey: song.key), forKey: song.key) == nil)
+        #expect(await phone.overrides(for: song, lyricsHash: "h").overrides.isEmpty)
+        // Set again later, the reading stands on both.
+        await phone.set(fix("サダメ", at: Date.now.timeIntervalSince1970 + 60), for: song)
+        await pad.merge(await phone.fixes(forKey: song.key), forKey: song.key)
+        #expect(await pad.overrides(for: song, lyricsHash: "h").overrides.map(\.reading) == ["サダメ"])
+    }
+
+    @Test func mergingSaysWhatToSendBack() async {
+        let phone = OverrideStore(fileURL: nil)
+        await phone.set(fix("サダメ", at: 10), for: song)
+        let other = SongFixes(overrides: [fix("アシタ", line: 3, at: 5)])
+        let back = await phone.merge(other, forKey: song.key)
+        #expect(back?.overrides.count == 2)
+        #expect(await phone.merge(back ?? SongFixes(), forKey: song.key) == nil)
+    }
+
+    @Test func onlyChangesMadeHereAreAnnounced() async {
+        let heard = Heard()
+        let store = OverrideStore(fileURL: nil) { key in Task { await heard.add(key) } }
+        await store.merge(SongFixes(overrides: [fix("サダメ", at: 10)]), forKey: song.key)
+        await store.set(fix("ウンメイ", line: 1, at: 20), for: song)
+        try? await Task.sleep(for: .milliseconds(50))
+        #expect(await heard.keys == [song.key])
+    }
+
+    private actor Heard {
+        var keys: [String] = []
+        func add(_ key: String) { keys.append(key) }
+    }
+}
