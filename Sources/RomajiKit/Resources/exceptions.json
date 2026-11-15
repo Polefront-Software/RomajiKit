@@ -20,6 +20,27 @@
   {"surface": "中", "reading": "ジュウ", "previous": ["一日", "1日", "一年", "1年", "一晩", "一生", "世界", "日本", "体", "身体", "家", "街", "町", "国", "部屋", "年", "夜", "顔", "そこら"], "note": "throughout: いちにちじゅう, not ちゅう"},
   {"surface": "ひとりぼっち", "reading": "ヒトリボッチ", "pos": "noun", "pin": true, "note": "cut as ひとり, ぼっ, ちの"},
   {"surface": "独りぼっち", "reading": "ヒトリボッチ", "pos": "noun", "pin": true},
-  {"surface": "一人ぼっち", "reading": "ヒトリボッチ", "pos": "noun", "pin": true}
+  {"surface": "一人ぼっち", "reading": "ヒトリボッチ", "pos": "noun", "pin": true},
+  {"surface": "正義", "reading": "セイギ", "note": "IPAdic has it as a given name first (まさよし)"},
+  {"surface": "傍", "reading": "ソバ", "note": "はた in IPAdic; そば in song (傍にいて)"},
+  {"surface": "我等", "reading": "ワレラ", "note": "cut as 我 (わが) + 等 (とう)"},
+  {"surface": "等", "reading": "ラ", "previous": ["僕", "君", "俺", "お前", "彼", "私", "あいつ", "こいつ", "そいつ", "奴", "あなた", "貴方", "彼女", "我"], "note": "after a pronoun it makes it plural (僕等, 君等), not とう"},
+  {"surface": "一番星", "reading": "イチバンボシ"},
+  {"surface": "宝物", "reading": "タカラモノ", "note": "ほうもつ in IPAdic"},
+  {"surface": "生き様", "reading": "イキザマ", "pos": "noun"},
+  {"surface": "愛おしい", "reading": "イトオシイ", "pos": "adj", "note": "cut as 愛 (あい) + おしい"},
+  {"surface": "御伽噺", "reading": "オトギバナシ", "pos": "noun"},
+  {"surface": "所為", "reading": "セイ", "note": "しょい in IPAdic"},
+  {"surface": "兎に角", "reading": "トニカク", "pos": "adv", "note": "cut as 兎 + に + 角"},
+  {"surface": "粉雪", "reading": "コナユキ", "note": "こゆき in IPAdic; こなゆき is the common reading"},
+  {"surface": "黄昏時", "reading": "タソガレドキ", "pos": "noun"},
+  {"surface": "一目惚れ", "reading": "ヒトメボレ", "pos": "noun"},
+  {"surface": "貴女", "reading": "アナタ", "pos": "pron", "note": "きじょ in IPAdic"},
+  {"surface": "貴男", "reading": "アナタ", "pos": "pron", "note": "a given name in IPAdic"},
+  {"surface": "小人", "reading": "コビト", "note": "こども in IPAdic"},
+  {"surface": "頃", "reading": "ゴロ", "previous": ["この"], "note": "この頃 is このごろ; あの頃 and その頃 keep ころ"},
+  {"surface": "金", "reading": "カネ", "next": ["を", "が", "は", "も", "で", "に", "さえ", "なんて", "だけ", "より", "と", "じゃ", "なら", "しか", "ばかり"], "note": "money, before a particle"},
+  {"surface": "金", "reading": "キン", "note": "otherwise gold; IPAdic may give a name reading (きむ)"},
+  {"surface": "底抜け", "reading": "ソコヌケ", "pin": true, "note": "would otherwise be cut inside a word before it (鍋底 + 抜け)"}
  ]
 }
