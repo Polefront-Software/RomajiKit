@@ -79,7 +79,7 @@ public struct RomajiEngine: Sendable {
             return RomanizedLine(
                 displayText: text, tokens: [], text: text, hasJapanese: false, sourceIndices: parsed.sourceIndices)
         }
-        var tokens = exceptions.analyze(text, with: analyzer)
+        var tokens = DrawnOutVowels.analyze(text) { exceptions.analyze($0, with: analyzer) }
         if let numbers { tokens = numbers.apply(tokens) }
         let excepted = exceptions.apply(tokens).map { (token: gikun.apply($0.token), proposal: $0.proposal) }
         var items = RubyApplier.apply(parsed.annotations + ruby, to: excepted)

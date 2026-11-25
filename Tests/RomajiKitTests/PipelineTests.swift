@@ -373,3 +373,25 @@ struct DisambiguatorTests {
         #expect(fixed.kana.hasPrefix("にんき"))
     }
 }
+
+@Suite struct DrawnOutVowelTests {
+    @Test(arguments: [
+        ("祭り会場のみなさーん", "matsuri kaijou no minasaan"),
+        ("祭り会場のみなさー ん", "matsuri kaijou no minasaan"),
+        ("みなさ〜ん", "minasaan"),
+        ("すごーい", "sugooi"),
+        // The mark at the end of a word, and a word known with its mark, stay as they were.
+        ("そうだねー また明日", "sou da nee mata ashita"),
+        ("えーと、あのー ね", "eeto, anoo ne"),
+    ])
+    func aMarkInsideAWord(text: String, romaji: String) {
+        #expect(TestSupport.engine.romanize(line: text).text == romaji, "\(text)")
+    }
+
+    @Test func theWordKeepsItsPlaceInTheLine() {
+        let line = TestSupport.engine.romanize(line: "祭り会場のみなさー ん")
+        #expect(line.tokens.map(\.resolved.token.surface) == ["祭り", "会場", "の", "みなさー ん"])
+        #expect(line.tokens.last?.resolved.token.range == 5..<11)
+        #expect(line.tokens.last?.resolved.reading == "ミナサーン")
+    }
+}
