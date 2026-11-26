@@ -105,6 +105,28 @@ import Testing
         #expect(await store.isDue(at: start.addingTimeInterval(100 + 3_600)))
     }
 
+    @Test func aVersionThatIsNoFolderNameIsRefused() async throws {
+        let places = try Places()
+        try places.publish(version: "one")
+        let store = places.store(interval: 100)
+        let start = Date(timeIntervalSince1970: 1_000_000)
+        _ = try await store.refresh(now: start)
+
+        let manifestURL = places.server.appendingPathComponent("manifest.json")
+        var manifest = try JSONDecoder().decode(PackStore.Manifest.self, from: Data(contentsOf: manifestURL))
+        // Each a day apart, past the wait after a look that failed.
+        for (day, version) in ["../outside", "", ".hidden", "a/b", "two words", "ä"].enumerated() {
+            manifest.version = version
+            try JSONEncoder().encode(manifest).write(to: manifestURL)
+            await #expect(throws: PackStore.Failure.badVersion) {
+                try await store.refresh(now: start.addingTimeInterval(Double(day + 1) * 86_400))
+            }
+            #expect(await store.installed?.version == "one")
+        }
+        #expect(try FileManager.default.contentsOfDirectory(atPath: places.device.path).sorted() == ["one", "state.json"])
+        #expect(PackStore.isFolderName("2026.11-a1"))
+    }
+
     @Test func aServerAwayLeavesThePackInUse() async throws {
         let places = try Places()
         try places.publish(version: "one")

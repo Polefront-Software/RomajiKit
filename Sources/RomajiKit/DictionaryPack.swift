@@ -58,6 +58,18 @@ public actor PackStore {
         case notFetched(URL)
         case wrongHash
         case notUnpacked
+        /// The manifest's version is not a name a folder may have.
+        case badVersion
+    }
+
+    /// Whether a version can name the pack's folder: letters, digits,
+    /// dots and hyphens, not starting with a dot. Anything else could
+    /// reach outside the packs' folder, or hide the pack.
+    static func isFolderName(_ version: String) -> Bool {
+        guard let first = version.first, first != "." else { return false }
+        return version.unicodeScalars.allSatisfy { scalar in
+            scalar.isASCII && (CharacterSet.alphanumerics.contains(scalar) || scalar == "." || scalar == "-")
+        }
     }
 
     private struct State: Codable {
@@ -94,7 +106,7 @@ public actor PackStore {
 
     /// The pack on the device, if one is here and whole.
     public var installed: DictionaryPack? {
-        guard let version = state.version else { return nil }
+        guard let version = state.version, Self.isFolderName(version) else { return nil }
         let pack = DictionaryPack(folder: folder.appendingPathComponent(version, isDirectory: true), version: version)
         return pack.isWhole ? pack : nil
     }
@@ -134,6 +146,7 @@ public actor PackStore {
             state.due = now.addingTimeInterval(interval)
             try? save()
         }
+        guard Self.isFolderName(manifest.version) else { throw Failure.badVersion }
         if manifest.version == state.version, installed != nil { return nil }
 
         let (archive, response) = try await session.download(from: source.appendingPathComponent(manifest.archive))
